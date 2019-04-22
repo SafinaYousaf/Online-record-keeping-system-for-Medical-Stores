@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB53Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Category_Id" />
+    </Key>
+    <Property Name="Category_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discription" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicine_Category" FromRole="Categories" ToRole="Medicine" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Sold_Id" />
+    </Key>
+    <Property Name="Sold_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Customer_Id" Type="Int32" Nullable="false" />
+    <Property Name="Medicine_Id" Type="Int32" Nullable="false" />
+    <Property Name="Soled_Date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Potency_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK_Customer_Medicine" FromRole="Customer" ToRole="Medicine" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Customer_Person" FromRole="Customer" ToRole="Person" />
+    <NavigationProperty Name="MedicinePotency" Relationship="Self.FK_Customer_Potency" FromRole="Customer" ToRole="MedicinePotency" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="Login_Id" />
+    </Key>
+    <Property Name="Login_Id" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Discriminator" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Login_Person" FromRole="Login" ToRole="Person" />
+  </EntityType>
+  <EntityType Name="Medicine">
+    <Key>
+      <PropertyRef Name="Medicine_Id" />
+    </Key>
+    <Property Name="Medicine_Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="CategoryID" Type="Int32" Nullable="false" />
+    <Property Name="SupplierID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK_Medicine_Category" FromRole="Medicine" ToRole="Categories" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Medicine" FromRole="Medicine" ToRole="Customer" />
+    <NavigationProperty Name="Supplier" Relationship="Self.FK_Medicine_Suppliers" FromRole="Medicine" ToRole="Suppliers" />
+    <NavigationProperty Name="MedicinePotencies" Relationship="Self.FK_Potency_Medicine" FromRole="Medicine" ToRole="MedicinePotency" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK_Sold_Medicine" FromRole="Medicine" ToRole="Sales" />
+    <NavigationProperty Name="Stock" Relationship="Self.FK_Stock_Medicine" FromRole="Medicine" ToRole="Stock" />
+  </EntityType>
+  <EntityType Name="MedicinePotency">
+    <Key>
+      <PropertyRef Name="Potency_Id" />
+    </Key>
+    <Property Name="Potency_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Medicine_Id" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="potency_mg" Type="Int32" Nullable="false" />
+    <Property Name="Expiry_date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Potency" FromRole="MedicinePotency" ToRole="Customer" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK_Potency_Medicine" FromRole="MedicinePotency" ToRole="Medicine" />
+    <NavigationProperty Name="Stocks" Relationship="Self.FK_Stock_Potency" FromRole="MedicinePotency" ToRole="Stock" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Country" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Person" FromRole="Person" ToRole="Customer" />
+    <NavigationProperty Name="Login" Relationship="Self.FK_Login_Person" FromRole="Person" ToRole="Login" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Person" FromRole="Person" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="Sold_Id" />
+    </Key>
+    <Property Name="Sold_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Medicine_Id" Type="Int32" Nullable="false" />
+    <Property Name="NoOfItem" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Staff_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK_Sold_Medicine" FromRole="Sales" ToRole="Medicine" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Sold_Staff" FromRole="Sales" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Staff_Id" />
+    </Key>
+    <Property Name="Staff_Id" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Person" Relationship="Self.FK_Staff_Person" FromRole="Staff" ToRole="Person" />
+    <NavigationProperty Name="Sales" Relationship="Self.FK_Sold_Staff" FromRole="Staff" ToRole="Sales" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="Stock_Id" />
+    </Key>
+    <Property Name="Stock_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Medicine_Id" Type="Int32" Nullable="false" />
+    <Property Name="NoOfItems" Type="Int32" Nullable="false" />
+    <Property Name="Potency_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medicine" Relationship="Self.FK_Stock_Medicine" FromRole="Stock" ToRole="Medicine" />
+    <NavigationProperty Name="MedicinePotency" Relationship="Self.FK_Stock_Potency" FromRole="Stock" ToRole="MedicinePotency" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Medicines" Relationship="Self.FK_Medicine_Suppliers" FromRole="Suppliers" ToRole="Medicine" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Medicine_Category">
+    <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Category_Id" />
+      </Principal>
+      <Dependent Role="Medicine">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Medicine">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Medicine_Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Medicine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Potency">
+    <End Role="MedicinePotency" Type="Self.MedicinePotency" Multiplicity="1" />
+    <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedicinePotency">
+        <PropertyRef Name="Potency_Id" />
+      </Principal>
+      <Dependent Role="Customer">
+        <PropertyRef Name="Potency_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Login_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Login" Type="Self.Login" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Login">
+        <PropertyRef Name="Login_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Medicine_Suppliers">
+    <End Role="Suppliers" Type="Self.Supplier" Multiplicity="1" />
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Suppliers">
+        <PropertyRef Name="SupplierID" />
+      </Principal>
+      <Dependent Role="Medicine">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Potency_Medicine">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="MedicinePotency" Type="Self.MedicinePotency" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Medicine_Id" />
+      </Principal>
+      <Dependent Role="MedicinePotency">
+        <PropertyRef Name="Medicine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sold_Medicine">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Medicine_Id" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="Medicine_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stock_Medicine">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="Stock" Type="Self.Stock" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Medicine_Id" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="Stock_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stock_Potency">
+    <End Role="MedicinePotency" Type="Self.MedicinePotency" Multiplicity="1" />
+    <End Role="Stock" Type="Self.Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedicinePotency">
+        <PropertyRef Name="Potency_Id" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="Potency_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Person">
+    <End Role="Person" Type="Self.Person" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Person">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sold_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="Sales" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Staff_Id" />
+      </Principal>
+      <Dependent Role="Sales">
+        <PropertyRef Name="Staff_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB53Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
+    <EntitySet Name="Medicines" EntityType="Self.Medicine" />
+    <EntitySet Name="MedicinePotencies" EntityType="Self.MedicinePotency" />
+    <EntitySet Name="People" EntityType="Self.Person" />
+    <EntitySet Name="Sales" EntityType="Self.Sale" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="Stocks" EntityType="Self.Stock" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Medicine_Category" Association="Self.FK_Medicine_Category">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Medicine" EntitySet="Medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Medicine" Association="Self.FK_Customer_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Person" Association="Self.FK_Customer_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Potency" Association="Self.FK_Customer_Potency">
+      <End Role="MedicinePotency" EntitySet="MedicinePotencies" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Login_Person" Association="Self.FK_Login_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Login" EntitySet="Logins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Medicine_Suppliers" Association="Self.FK_Medicine_Suppliers">
+      <End Role="Suppliers" EntitySet="Suppliers" />
+      <End Role="Medicine" EntitySet="Medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Potency_Medicine" Association="Self.FK_Potency_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="MedicinePotency" EntitySet="MedicinePotencies" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sold_Medicine" Association="Self.FK_Sold_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_Medicine" Association="Self.FK_Stock_Medicine">
+      <End Role="Medicine" EntitySet="Medicines" />
+      <End Role="Stock" EntitySet="Stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_Potency" Association="Self.FK_Stock_Potency">
+      <End Role="MedicinePotency" EntitySet="MedicinePotencies" />
+      <End Role="Stock" EntitySet="Stocks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Person" Association="Self.FK_Staff_Person">
+      <End Role="Person" EntitySet="People" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sold_Staff" Association="Self.FK_Sold_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="Sales" EntitySet="Sales" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
