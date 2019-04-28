@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f87bdece1da8464d9e2ea32888d84667" Name="Diagram1">
+        <EntityTypeShape EntityType="DB53Model.Category" Width="1.5" PointX="1.5" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Customer" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Login" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Medicine" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.MedicinePotency" Width="1.5" PointX="3" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Person" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Potency" Width="1.5" PointX="0.75" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Sale" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Staff" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB53Model.Supplier" Width="1.5" PointX="1.5" PointY="19.625" IsExpanded="true" />
+        <AssociationConnector Association="DB53Model.FK_Medicine_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_Sales_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_Login_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_Medicine_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_MedicinePotency_Medicine" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_MedicinePotency_Potency" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_Sales_MedicinePotency" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_Staff_Person" ManuallyRouted="false" />
+        <AssociationConnector Association="DB53Model.FK_Sold_Staff" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
