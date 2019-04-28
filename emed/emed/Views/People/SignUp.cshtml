@@ -1,0 +1,162 @@
+﻿@model emed.Models.User
+
+@{
+    ViewBag.Title = "SignUp";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign UP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="~/assets/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/utillogin.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/mainlogin.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+    @using (Html.BeginForm("SignUp", "People", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="limiter">
+            <div class="container-login100" style="background-image: url('http://localhost:51460/assets/images/med.jpg');">
+                <div class="wrap-login100" style="background-color: #32c69a ">
+                    <form class="login100-form validate-form" style="background-color: #32c69a ">
+                        <span class="login100-form-logo">
+                            <i class="zmdi zmdi-landscape"></i>
+                        </span>
+
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            Sign UP
+                        </span>
+                        <div class="wrap-input100 validate-input" data-validate="Enter Valid Name .Use Alphabets Only.">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.FirstName, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter Valid Name .Use Alphabets Only.">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.LastName, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Enter valid Contact Number">
+                            @Html.LabelFor(model => model.Contact, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Contact, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter valid Email e.g xyz@gmail.com">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Password must be atleast 8 alphanumeric characters.">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Password, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                    
+                        <div class="wrap-input100 validate-input" data-validate="It must match the Password">
+                            @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter your Address.">
+                            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Address, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter your Country Name">
+                            @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Country, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter Date">
+                            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter Gender">
+                            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Gender, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="wrap-input100 validate-input" data-validate="Enter Gender">
+                            @Html.LabelFor(model => model.Discriminator, htmlAttributes: new { @class = "input100" })
+                            @Html.TextBoxFor(model => model.Discriminator, new { htmlAttributes = new { @class = "input100" }, style = "background-color: #32c69a; color: white" })
+
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+
+
+
+
+
+
+
+                        
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn">
+                                SignUP
+                            </button>
+                        </div>
+
+                        <div class="text-center p-t-90">
+                            <a class="txt1" href="~/People/Login">
+                                Already have an Account?
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+
+    }
+        <!--===============================================================================================-->
+        <script src="~/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/assets/vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/assets/vendor/bootstrap/js/popper.js"></script>
+        <script src="~/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/assets/vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/assets/vendor/daterangepicker/moment.min.js"></script>
+        <script src="~/assets/vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/assets/vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/assets/js/mainlogin.js"></script>
+
+    
+    </body>
+</html>
+
