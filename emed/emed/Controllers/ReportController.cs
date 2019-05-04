@@ -17,6 +17,7 @@ namespace emed.Controllers
         {
             return View();
         }
+
         public ActionResult AllSales()
         {
             emed.Models.DB53Entities db = new emed.Models.DB53Entities();
@@ -31,12 +32,13 @@ namespace emed.Controllers
             return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\AllSalesReport.pdf");
 
         }
+
         public ActionResult AllSalesAction()
         {
             return AllSales();
 
         }
-        
+
         public ActionResult MedicineInfo()
         {
             emed.Models.DB53Entities db = new emed.Models.DB53Entities();
@@ -96,6 +98,86 @@ namespace emed.Controllers
         public ActionResult NoOfItemAction()
         {
             return NoOfItem();
+
+        }
+       
+
+        public ActionResult DailySales()
+        {
+            emed.Models.DB53Entities db = new emed.Models.DB53Entities();
+            //CrMVCApp.Models.Customer c;
+            //var c = (from b in db.DailySales select b).ToList();
+            var c = (from b in db.DailySales select b).ToList();
+
+            DailySales rpt = new DailySales();
+            rpt.Load();
+            rpt.SetDataSource(c);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\DailySalesReport.pdf");
+
+        }
+        public ActionResult DailySalesAction()
+        {
+            return DailySales();
+
+        }
+        //3rd
+        public ActionResult ExpiredMedicine()
+        {
+            emed.Models.DB53Entities db = new emed.Models.DB53Entities();
+            //CrMVCApp.Models.Customer c;
+            var c = (from b in db.ExpiredMedicines select b).ToList();
+
+            ExpiredMedicine rpt = new ExpiredMedicine();
+            rpt.Load();
+            rpt.SetDataSource(c);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\ExpiredMedicineReport.pdf");
+
+        }
+        public ActionResult ExpiredMedicineAction()
+        {
+            return ExpiredMedicine();
+
+        }
+        public ActionResult GenderDiscrimination()
+        {
+            emed.Models.DB53Entities db = new emed.Models.DB53Entities();
+            //CrMVCApp.Models.Customer c;
+            var c = (from b in db.GenderDiscriminations select b).ToList();
+
+            GenderDiscrimination rpt = new GenderDiscrimination();
+            rpt.Load();
+            rpt.SetDataSource(c);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\GenderDiscriminationReport.pdf");
+
+        }
+        public ActionResult GenderDiscriminationAction()
+        {
+            return GenderDiscrimination();
+
+        }
+
+        
+        
+        
+        public ActionResult SupplierInfo()
+        {
+            emed.Models.DB53Entities db = new emed.Models.DB53Entities();
+            //CrMVCApp.Models.Customer c;
+            var e = db.SupplierInfoes.ToList();
+
+            SupplierInfo rpt = new SupplierInfo();
+            rpt.Load();
+            rpt.SetDataSource(e);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\StaffCountReport.pdf");
+
+        }
+        public ActionResult SupplierInfoAction()
+        {
+            return SupplierInfo();
 
         }
 
