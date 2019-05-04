@@ -181,7 +181,44 @@ namespace emed.Controllers
 
         }
 
-        
+        public ActionResult ItemSoldByStaff()
+        {
+            emed.Models.DB53Entities db = new emed.Models.DB53Entities();
+            //CrMVCApp.Models.Customer c;
+            var c = (from b in db.ItemSoldByStaffs select b).ToList();
+
+            ItemSoldByStaff rpt = new ItemSoldByStaff();
+            rpt.Load();
+            rpt.SetDataSource(c);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\AllSalesReport.pdf");
+
+        }
+        public ActionResult ItemSoldByStaffAction()
+        {
+            return ItemSoldByStaff();
+
+        }
+
+
+        public ActionResult StaffCount()
+        {
+            emed.Models.DB53Entities db = new emed.Models.DB53Entities();
+            //CrMVCApp.Models.Customer c;
+            var e = db.StaffCounts.ToList();
+
+            StaffCount rpt = new StaffCount();
+            rpt.Load();
+            rpt.SetDataSource(e);
+            Stream s = rpt.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
+            return File(s, "C:\\Users\\M.ALI\\Documents\\ProjectAreports\\StaffCountReport.pdf");
+
+        }
+        public ActionResult StaffCountAction()
+        {
+            return StaffCount();
+
+        }
 
 
     }
